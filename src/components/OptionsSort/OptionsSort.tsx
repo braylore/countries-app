@@ -1,4 +1,4 @@
-import { ToggleButtonGroup, Typography, ToggleButton } from '@mui/material';
+import { ToggleButtonGroup, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC } from 'react';
 import { OptionsSortElements } from '../../types/OptionsSortElements';

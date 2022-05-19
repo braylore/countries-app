@@ -1,16 +1,16 @@
-import Accrodion from '../UI/Accordion/Accordion';
+import Accordion from '../UI/Accordion/Accordion';
 import { optionsSort } from '../../constants/optionsSort';
 import OptionsSort from '../OptionsSort/OptionsSort';
 
 const OptionsForm = () => {
   return (
     <div>
-      <Accrodion label="Filtration">
+      <Accordion label="Filtration">
         <div></div>
-      </Accrodion>
-      <Accrodion label="Sorting">
+      </Accordion>
+      <Accordion label="Sorting">
         <OptionsSort {...optionsSort} />
-      </Accrodion>
+      </Accordion>
     </div>
   );
 };
