@@ -1,6 +1,7 @@
 import { Grid, Typography, Paper, Box } from '@mui/material';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import styles from './countryListItem.module.scss';
 
 interface ICountriesListItemProps {
   name: string;
@@ -18,9 +19,10 @@ const CountriesListItem: FC<ICountriesListItemProps> = ({ name, flag, capital, p
       xl={4}
     >
       <Link to={`/${name}`}>
-        <Paper>
+        <Paper className={styles.listItem}>
           <img
             loading="lazy"
+            className={styles.img}
             src={flag}
             alt={`${name} flag`}
           />
