@@ -1,5 +1,6 @@
 import { Grid, Typography, Paper, Box } from '@mui/material';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 interface ICountriesListItemProps {
   name: string;
@@ -16,44 +17,46 @@ const CountriesListItem: FC<ICountriesListItemProps> = ({ name, flag, capital, p
       item
       xl={4}
     >
-      <Paper>
-        <img
-          loading="lazy"
-          src={flag}
-          alt={`${name} flag`}
-        />
-        <Box
-          sx={{
-            p: 2
-          }}
-        >
-          <Typography
-            component="h3"
+      <Link to={`/${name}`}>
+        <Paper>
+          <img
+            loading="lazy"
+            src={flag}
+            alt={`${name} flag`}
+          />
+          <Box
             sx={{
-              textAlign: 'center',
-              fontSize: '22px',
-              marginBottom: '40px',
-              height: '35px'
+              p: 2
             }}
           >
-            <b>{name}</b>
-          </Typography>
-          <Typography>
-            <b> Population: </b>
-            {population}
-          </Typography>
-          <Typography>
-            <b>Area: </b>
-            {area}
-            km
-            <sup>2</sup>
-          </Typography>
-          <Typography>
-            <b>Capital: </b>
-            {capital || '-'}
-          </Typography>
-        </Box>
-      </Paper>
+            <Typography
+              component="h3"
+              sx={{
+                textAlign: 'center',
+                fontSize: '22px',
+                marginBottom: '40px',
+                height: '35px'
+              }}
+            >
+              <b>{name}</b>
+            </Typography>
+            <Typography>
+              <b> Population: </b>
+              {population}
+            </Typography>
+            <Typography>
+              <b>Area: </b>
+              {area}
+              km
+              <sup>2</sup>
+            </Typography>
+            <Typography>
+              <b>Capital: </b>
+              {capital || '-'}
+            </Typography>
+          </Box>
+        </Paper>
+      </Link>
     </Grid>
   );
 };
