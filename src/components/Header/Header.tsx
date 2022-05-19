@@ -2,6 +2,7 @@ import { IoEarth } from 'react-icons/io5';
 import { FC, KeyboardEvent } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import styles from './header.module.scss';
 
 const Header: FC = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const Header: FC = () => {
       elevation={12}
       square
       component="header"
+      className={styles.header}
     >
       <Box
         maxWidth={1150}
@@ -35,6 +37,7 @@ const Header: FC = () => {
           tabIndex={0}
           onKeyDown={handleKeyDown}
           onClick={handleClick}
+          className={styles.wrapper}
         >
           <IoEarth />
           <Typography

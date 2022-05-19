@@ -1,0 +1,35 @@
+.header {
+  width: 100vw;
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .wrapper {
+    cursor: pointer;
+    text-decoration: underline;
+    svg {
+      font-size: 34px;
+    }
+    &.light {
+      svg {
+        fill: #15223c;
+      }
+      &:hover {
+        svg {
+          fill: #294c80;
+        }
+      }
+    }
+    &.dark {
+      svg {
+        fill: #e2d8cb;
+      }
+      &:hover {
+        svg {
+          fill: #dbbd8f;
+        }
+      }
+    }
+  }
+}
