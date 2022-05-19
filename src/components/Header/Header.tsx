@@ -36,7 +36,7 @@ const Header: FC = () => {
       sx={{
         boxShadow
       }}
-      className={`${styles.header} ${styles[mode]}`}
+      className={styles.header}
     >
       <Box
         maxWidth={1150}
@@ -51,7 +51,7 @@ const Header: FC = () => {
           tabIndex={0}
           onKeyDown={handleKeyDown}
           onClick={handleClick}
-          className={styles.wrapper}
+          className={`${styles.wrapper} ${styles[mode]}`}
         >
           <IoEarth />
           <Typography
