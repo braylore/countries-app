@@ -1,15 +1,25 @@
-import Header from '../Header/Header';
-import CountriesList from '../CountriesList/CountriesList';
-import { useGetAllCountriesQuery } from '../../api/countriesApi';
+import { Route, Routes } from 'react-router-dom';
+import Layout from '../Layout/Layout';
+import HomePage from '../../pages/HomePage';
+import InfoPage from '../../pages/InfoPage';
 
 const App = () => {
-  const { data = [] } = useGetAllCountriesQuery();
-
   return (
-    <>
-      <Header />
-      <CountriesList countriesList={data} />
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={<Layout />}
+      >
+        <Route
+          index
+          element={<HomePage />}
+        />
+        <Route
+          path=":name"
+          element={<InfoPage />}
+        />
+      </Route>
+    </Routes>
   );
 };
 
