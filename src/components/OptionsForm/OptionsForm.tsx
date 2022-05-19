@@ -1,4 +1,6 @@
 import Accrodion from '../UI/Accordion/Accordion';
+import { optionsSort } from '../../constants/optionsSort';
+import OptionsSort from '../OptionsSort/OptionsSort';
 
 const OptionsForm = () => {
   return (
@@ -7,7 +9,7 @@ const OptionsForm = () => {
         <div></div>
       </Accrodion>
       <Accrodion label="Sorting">
-        <div></div>
+        <OptionsSort {...optionsSort} />
       </Accrodion>
     </div>
   );
