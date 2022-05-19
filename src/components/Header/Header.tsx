@@ -33,6 +33,9 @@ const Header: FC = () => {
       elevation={12}
       square
       component="header"
+      sx={{
+        boxShadow
+      }}
       className={`${styles.header} ${styles[mode]}`}
     >
       <Box
