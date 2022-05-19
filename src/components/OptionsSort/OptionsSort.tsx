@@ -2,6 +2,7 @@ import { ToggleButtonGroup, Typography, ToggleButton } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC } from 'react';
 import { OptionsSortElements } from '../../types/OptionsSortElements';
+import ToggleBtn from '../UI/ToggleBtn/ToggleBtn';
 
 interface IOptionsSortProps {
   text: string;
@@ -34,13 +35,13 @@ const OptionsSort: FC<IOptionsSortProps> = ({ text, elements }) => {
               }}
               key={label}
             >
-              <ToggleButton
+              <ToggleBtn
                 disableRipple
                 key={label}
                 value={value}
               >
                 {label}
-              </ToggleButton>
+              </ToggleBtn>
             </Box>
           );
         })}
