@@ -2,10 +2,21 @@ import { IoEarth } from 'react-icons/io5';
 import { FC, KeyboardEvent } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+import { HiOutlineSun, HiOutlineMoon } from 'react-icons/hi';
+import { useColorMode } from '../../hooks/useColorMode';
 import styles from './header.module.scss';
 
 const Header: FC = () => {
   const navigate = useNavigate();
+  const { mode, toggleColorMode } = useColorMode();
+
+  const boxShadow =
+    mode === 'dark'
+      ? `0px 7px 8px -4px rgb(146 146 146 / 20%), 
+      0px 12px 17px 2px rgb(146 146 175 / 14%), 
+      0px 5px 22px 4px rgb(146 146 175 / 12%)`
+      : '';
 
   const handleClick = () => {
     navigate('/');
@@ -22,7 +33,7 @@ const Header: FC = () => {
       elevation={12}
       square
       component="header"
-      className={styles.header}
+      className={`${styles.header} ${styles[mode]}`}
     >
       <Box
         maxWidth={1150}
@@ -49,7 +60,14 @@ const Header: FC = () => {
             Countries App
           </Typography>
         </div>
-        <div>Switch</div>
+        <div>
+          <IconButton
+            onClick={toggleColorMode}
+            color="inherit"
+          >
+            {mode === 'dark' ? <HiOutlineSun fontSize="30px" /> : <HiOutlineMoon fontSize="30px" />}
+          </IconButton>
+        </div>
       </Box>
     </Paper>
   );
