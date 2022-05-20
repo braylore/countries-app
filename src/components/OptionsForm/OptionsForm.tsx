@@ -1,22 +1,33 @@
-import { MouseEvent, SyntheticEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, SyntheticEvent, useState } from 'react';
 import { Box } from '@mui/material';
 import Accordion from '../UI/Accordion/Accordion';
 import { optionsSort } from '../../constants/optionsSort';
 import OptionsSort from '../OptionsSort/OptionsSort';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { optionsSortChanged } from '../../store/reducers/optionsSlice';
+import { optionsSortChanged, optionsFilterChanged } from '../../store/reducers/optionsSlice';
 import { SortValueEnum } from '../../constants/sortEnums';
 import Tabs from '../UI/Tabs/Tabs';
 import TabPanel from '../UI/Tabs/TabPanel';
 import { optionsFilters } from '../../constants/optionsFilters';
+import { PayloadOptionsFilters } from '../../types/PayloadOptionsFilters';
+import { FiltersNameEnum } from '../../constants/filtersEnums';
+import OptionsFilters from '../OptionsFilters/OptionsFilters';
 
 const OptionsForm = () => {
   const dispatch = useAppDispatch();
-  const { sort } = useAppSelector((state) => state.optionsReducer);
+  const { sort, filters } = useAppSelector((state) => state.optionsReducer);
   const [tabValue, setTabValue] = useState(0);
 
   const handleSortChange = (e: MouseEvent<HTMLElement>, value: SortValueEnum) => {
     dispatch(optionsSortChanged(value));
+  };
+
+  const handleFilterChange = (filtersName: FiltersNameEnum) => (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      optionsFilterChanged({
+        [filtersName]: e.target.value
+      } as PayloadOptionsFilters)
+    );
   };
 
   const handleTabChange = (event: SyntheticEvent, newValue: number) => {
@@ -31,14 +42,19 @@ const OptionsForm = () => {
           onTabChange={handleTabChange}
           options={optionsFilters}
         >
-          {optionsFilters.map(({ filtersName }, i) => {
+          {optionsFilters.map(({ elements, filtersName }, i) => {
             return (
               <TabPanel
                 key={filtersName}
                 value={tabValue}
                 index={i}
               >
-                <div>{filtersName}</div>
+                <OptionsFilters
+                  filters={filters}
+                  filtersName={filtersName}
+                  elements={elements}
+                  handleChange={handleFilterChange(filtersName)}
+                />
               </TabPanel>
             );
           })}
