@@ -10,6 +10,8 @@ import Pagination from '../components/UI/Pagination/Pagination';
 import Select from '../components/UI/Select/Select';
 import { selectOptions } from '../constants/selectOptions';
 import { countriestSelectChanged, currentPageChanged } from '../store/reducers/paginationSlice';
+import { getNumberOfPage } from '../utils/getNumberOfPage';
+import { getSlicedCountries } from '../utils/getSlicedCountries';
 
 const HomePage: FC = () => {
   const { data: countries = [] } = useGetAllCountriesQuery();
@@ -34,6 +36,9 @@ const HomePage: FC = () => {
   const handleSelectChange = (e: SelectChangeEvent<unknown>) => {
     dispatch(countriestSelectChanged(e.target.value as number));
   };
+
+  const totalPages = getNumberOfPage(countries.length, countriestSelect);
+  const countriesList = getSlicedCountries(countriestSelect, currentPage, countries);
 
   return (
     <>
@@ -64,16 +69,10 @@ const HomePage: FC = () => {
           />
         </Grid>
       </Grid>
-
-      <CountriesList
-        countriesList={countries.slice(
-          countriestSelect * currentPage - countriestSelect,
-          countriestSelect * currentPage
-        )}
-      />
+      <CountriesList countriesList={countriesList} />
       <Pagination
         changePage={handlePaginationChange}
-        totalPages={Math.ceil(countries.length / countriestSelect)}
+        totalPages={totalPages}
         currentPage={currentPage}
       />
     </>
