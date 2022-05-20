@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import LoaderRound from '../Loaders/LoaderRound';
+import LoaderRound from '../Loaders/LoaderRound/LoaderRound';
 
 interface IBackdropProps {
   isOpen: boolean;

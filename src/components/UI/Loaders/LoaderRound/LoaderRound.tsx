@@ -1,5 +1,5 @@
 import styles from './loaderRound.module.scss';
-import { useColorMode } from '../../../hooks/useColorMode';
+import { useColorMode } from '../../../../hooks/useColorMode';
 
 const LoaderRound = () => {
   const { mode } = useColorMode();
