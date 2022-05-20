@@ -1,6 +1,6 @@
-import Radio from '@mui/material/Radio';
 import { RadioGroup, FormControlLabel, FormControl } from '@mui/material';
 import { ChangeEvent, FC } from 'react';
+import Radio from '../UI/Radio/Radio';
 import { FiltersNameEnum } from '../../constants/filtersEnums';
 import { IOptionsSliceFilters } from '../../store/reducers/optionsSlice';
 import { OptionsFiltersElements } from '../../types/OptionsFilters';
