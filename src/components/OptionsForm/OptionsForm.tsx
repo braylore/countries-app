@@ -35,7 +35,11 @@ const OptionsForm = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        marginTop: '20px'
+      }}
+    >
       <Accordion label="Filtration">
         <Tabs
           value={tabValue}
@@ -60,21 +64,27 @@ const OptionsForm = () => {
           })}
         </Tabs>
       </Accordion>
-      <Accordion label="Sorting">
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
-        >
-          <OptionsSort
-            handleClick={handleSortChange}
-            activeSort={sort}
-            {...optionsSort}
-          />
-        </Box>
-      </Accordion>
+      <div
+        style={{
+          marginTop: '5px'
+        }}
+      >
+        <Accordion label="Sorting">
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
+            <OptionsSort
+              handleClick={handleSortChange}
+              activeSort={sort}
+              {...optionsSort}
+            />
+          </Box>
+        </Accordion>
+      </div>
     </div>
   );
 };
