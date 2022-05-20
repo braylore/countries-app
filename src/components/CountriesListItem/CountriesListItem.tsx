@@ -49,7 +49,7 @@ const CountriesListItem: FC<ICountriesListItemProps> = ({ name, flag, capital, p
             <Typography>
               <b>Area: </b>
               {area}
-              km
+              &nbsp; km
               <sup>2</sup>
             </Typography>
             <Typography>
