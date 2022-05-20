@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { BASE_URL, ALL_COUNTRIES, getCountryByName } from '../constants/urls';
+import { BASE_URL, ALL_COUNTRIES, getCountryByName, getCountryByCode } from '../constants/urls';
 import { ICountry } from '../types/ICountry';
 
 export const countriesApi = createApi({
@@ -11,8 +11,11 @@ export const countriesApi = createApi({
     }),
     getCountryByName: builder.query<ICountry[], string>({
       query: (name) => getCountryByName(name)
+    }),
+    getCountryByCode: builder.query<ICountry[], string>({
+      query: (codes) => getCountryByCode(codes)
     })
   })
 });
 
-export const { useGetAllCountriesQuery, useGetCountryByNameQuery } = countriesApi;
+export const { useGetAllCountriesQuery, useGetCountryByNameQuery, useGetCountryByCodeQuery } = countriesApi;
