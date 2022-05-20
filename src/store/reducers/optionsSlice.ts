@@ -47,9 +47,15 @@ export const optionsSlice = createSlice({
       } else {
         state.sort = `${action.payload}-up`;
       }
+    },
+    optionsFilterChanged: (state, action: PayloadAction<any>) => {
+      state.filters = {
+        ...state.filters,
+        ...action.payload
+      };
     }
   }
 });
 
-export const { optionsSortChanged } = optionsSlice.actions;
+export const { optionsSortChanged, optionsFilterChanged } = optionsSlice.actions;
 export default optionsSlice.reducer;
