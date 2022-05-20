@@ -12,6 +12,7 @@ import { selectOptions } from '../constants/selectOptions';
 import { countriestSelectChanged, currentPageChanged } from '../store/reducers/paginationSlice';
 import { getNumberOfPage } from '../utils/getNumberOfPage';
 import { getSlicedCountries } from '../utils/getSlicedCountries';
+import { useFoundSortedAndFilteredCountries } from '../hooks/useCountries';
 
 const HomePage: FC = () => {
   const { data: countries = [] } = useGetAllCountriesQuery();
@@ -22,6 +23,16 @@ const HomePage: FC = () => {
     sort,
     searchQuery
   } = useAppSelector((state) => state.optionsReducer);
+
+  const processedСountries = useFoundSortedAndFilteredCountries(
+    countries,
+    carSide,
+    landlocked,
+    region,
+    unMember,
+    sort,
+    searchQuery
+  );
 
   const { countriestSelect, currentPage } = useAppSelector((state) => state.paginationReducer);
 
@@ -37,8 +48,8 @@ const HomePage: FC = () => {
     dispatch(countriestSelectChanged(e.target.value as number));
   };
 
-  const totalPages = getNumberOfPage(countries.length, countriestSelect);
-  const countriesList = getSlicedCountries(countriestSelect, currentPage, countries);
+  const totalPages = getNumberOfPage(processedСountries.length, countriestSelect);
+  const countriesList = getSlicedCountries(countriestSelect, currentPage, processedСountries);
 
   return (
     <>
