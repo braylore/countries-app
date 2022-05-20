@@ -6,6 +6,7 @@ import {
   FiltersRegionValueEnum,
   FiltersNameEnum
 } from '../../constants/filtersEnums';
+import { PayloadOptionsFilters } from '../../types/PayloadOptionsFilters';
 
 export type OptionsSliceSort = `${SortValueEnum}-${'up' | 'down'}` | 'none';
 
@@ -48,7 +49,7 @@ export const optionsSlice = createSlice({
         state.sort = `${action.payload}-up`;
       }
     },
-    optionsFilterChanged: (state, action: PayloadAction<any>) => {
+    optionsFilterChanged: (state, action: PayloadAction<PayloadOptionsFilters>) => {
       state.filters = {
         ...state.filters,
         ...action.payload
