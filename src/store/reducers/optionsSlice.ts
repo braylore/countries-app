@@ -7,6 +7,7 @@ import {
   FiltersNameEnum
 } from '../../constants/filtersEnums';
 import { PayloadOptionsFilters } from '../../types/PayloadOptionsFilters';
+import { IPayloadOptionsSort } from '../../types/IPayloadOptionsSort';
 
 export type OptionsSliceSort = `${SortValueEnum}-${'up' | 'down'}` | 'none';
 
@@ -49,6 +50,17 @@ export const optionsSlice = createSlice({
         state.sort = `${action.payload}-up`;
       }
     },
+    optionsSortChangedByChip: (state, action: PayloadAction<IPayloadOptionsSort | 'none'>) => {
+      if (action.payload !== 'none') {
+        if (action.payload.direction === '-up') {
+          state.sort = `${action.payload.sortType}-down`;
+        } else {
+          state.sort = `${action.payload.sortType}-up`;
+        }
+      } else {
+        state.sort = 'none';
+      }
+    },
     optionsFilterChanged: (state, action: PayloadAction<PayloadOptionsFilters>) => {
       state.filters = {
         ...state.filters,
@@ -61,5 +73,6 @@ export const optionsSlice = createSlice({
   }
 });
 
-export const { optionsSortChanged, optionsFilterChanged, optionsSearchChanged } = optionsSlice.actions;
+export const { optionsSortChanged, optionsFilterChanged, optionsSearchChanged, optionsSortChangedByChip } =
+  optionsSlice.actions;
 export default optionsSlice.reducer;
