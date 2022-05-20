@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import { FC, ReactNode } from 'react';
+import styles from './tabPanel.module.scss';
 
 interface ICustomTabPanelProps {
   children: ReactNode;
@@ -12,6 +13,7 @@ const CustomTabPanel: FC<ICustomTabPanelProps> = (props) => {
 
   return (
     <div
+      className={styles.wrapper}
       hidden={value !== index}
       {...other}
     >
