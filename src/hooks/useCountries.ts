@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { ICountry } from '../types/ICountry';
 import { FiltersRegionValueEnum, FiltersTrafficValueEnum, FiltersBooleanValueEnum } from '../constants/filtersEnums';
 import { OptionsSliceSort } from '../store/reducers/optionsSlice';
+import { fixWrongApiArea } from '../utils/fixWrongApiArea';
 
 export const useFilteredCountries = (
   countries: ICountry[],
@@ -11,7 +12,7 @@ export const useFilteredCountries = (
   unFilter: keyof typeof FiltersBooleanValueEnum
 ) => {
   const processingCountries = useMemo(() => {
-    let countriesArr = [...countries];
+    let countriesArr = fixWrongApiArea(countries);
 
     if (carFilter !== 'all') {
       countriesArr = countriesArr.filter((country) => country.car.side === carFilter);
