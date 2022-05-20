@@ -12,6 +12,7 @@ import { optionsFilters } from '../../constants/optionsFilters';
 import { PayloadOptionsFilters } from '../../types/PayloadOptionsFilters';
 import { FiltersNameEnum } from '../../constants/filtersEnums';
 import OptionsFilters from '../OptionsFilters/OptionsFilters';
+import { useSelectedOptions } from '../../hooks/useSelectedOptions';
 
 interface IOptionsFormProps {
   isDisabled: boolean;
@@ -38,6 +39,8 @@ const OptionsForm: FC<IOptionsFormProps> = ({ isDisabled }) => {
     setTabValue(newValue);
   };
 
+  const { selectedFilters, selectedSort } = useSelectedOptions(filters, sort);
+
   return (
     <div
       style={{
@@ -45,6 +48,7 @@ const OptionsForm: FC<IOptionsFormProps> = ({ isDisabled }) => {
       }}
     >
       <Accordion
+        selectedOptionsEntity={selectedFilters}
         isDisabled={isDisabled}
         label="Filtration"
       >
@@ -77,6 +81,7 @@ const OptionsForm: FC<IOptionsFormProps> = ({ isDisabled }) => {
         }}
       >
         <Accordion
+          selectedOptionsEntity={selectedSort}
           isDisabled={isDisabled}
           label="Sorting"
         >

@@ -5,6 +5,9 @@ import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/Accord
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { FC, ReactNode, SyntheticEvent, useState } from 'react';
+import ChipFilters from '../../ChipFilters/ChipFilters';
+import ChipSort from '../../ChipSort/ChipSort';
+import { SelectedFilters, SelectedSort } from '../../../types/SelectedOptions';
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion
@@ -46,9 +49,10 @@ interface ICustomAccordionProps {
   children: ReactNode;
   label: string;
   isDisabled: boolean;
+  selectedOptionsEntity: SelectedFilters[] | (SelectedSort | 'none');
 }
 
-const CustomAccordion: FC<ICustomAccordionProps> = ({ children, label, isDisabled }) => {
+const CustomAccordion: FC<ICustomAccordionProps> = ({ children, label, isDisabled, selectedOptionsEntity }) => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
   const handleChange = (panel: string) => (event: SyntheticEvent, newExpanded: boolean) => {
@@ -63,6 +67,11 @@ const CustomAccordion: FC<ICustomAccordionProps> = ({ children, label, isDisable
     >
       <AccordionSummary expandIcon={expanded === 'panel1' ? <HiMinus /> : <HiPlus />}>
         <Typography>{label}</Typography>
+        {Array.isArray(selectedOptionsEntity) ? (
+          <ChipFilters selectedFiltersEntity={selectedOptionsEntity} />
+        ) : selectedOptionsEntity === 'none' ? null : (
+          <ChipSort selectedSortEntity={selectedOptionsEntity || ''} />
+        )}
       </AccordionSummary>
       <AccordionDetails>{children}</AccordionDetails>
     </Accordion>
