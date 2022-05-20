@@ -13,6 +13,7 @@ import { countriestSelectChanged, currentPageChanged } from '../store/reducers/p
 import { getNumberOfPage } from '../utils/getNumberOfPage';
 import { getSlicedCountries } from '../utils/getSlicedCountries';
 import { useFoundSortedAndFilteredCountries } from '../hooks/useCountries';
+import { useDidMountEffect } from '../hooks/useDidMountEffect';
 
 const HomePage: FC = () => {
   const { data: countries = [] } = useGetAllCountriesQuery();
@@ -35,6 +36,10 @@ const HomePage: FC = () => {
   );
 
   const { countriestSelect, currentPage } = useAppSelector((state) => state.paginationReducer);
+
+  useDidMountEffect(() => {
+    dispatch(currentPageChanged(1));
+  }, [carSide, landlocked, region, unMember, sort, searchQuery, countriestSelect]);
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
     dispatch(optionsSearchChanged(e.target.value));
