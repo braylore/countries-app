@@ -14,9 +14,10 @@ import { getNumberOfPage } from '../utils/getNumberOfPage';
 import { getSlicedCountries } from '../utils/getSlicedCountries';
 import { useFoundSortedAndFilteredCountries } from '../hooks/useCountries';
 import { useDidMountEffect } from '../hooks/useDidMountEffect';
+import SkeletonList from '../components/SkeletonList/SkeletonList';
 
 const HomePage: FC = () => {
-  const { data: countries = [] } = useGetAllCountriesQuery();
+  const { data: countries = [], isLoading, isError } = useGetAllCountriesQuery();
   const dispatch = useAppDispatch();
 
   const {
@@ -85,6 +86,11 @@ const HomePage: FC = () => {
           />
         </Grid>
       </Grid>
+      {isLoading && <SkeletonList />}
+      {isError && <h2 style={{ textAlign: 'center' }}>An error occurred while fetching countries</h2>}
+      {countriesList.length === 0 && !isLoading && !isError && (
+        <h2 style={{ textAlign: 'center' }}>No countries found</h2>
+      )}
       <CountriesList countriesList={countriesList} />
       <Pagination
         changePage={handlePaginationChange}
