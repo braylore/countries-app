@@ -65,7 +65,10 @@ const CustomAccordion: FC<ICustomAccordionProps> = ({ children, label, isDisable
       expanded={expanded === 'panel1'}
       onChange={handleChange('panel1')}
     >
-      <AccordionSummary expandIcon={expanded === 'panel1' ? <HiMinus /> : <HiPlus />}>
+      <AccordionSummary
+        sx={{ minHeight: '62px' }}
+        expandIcon={expanded === 'panel1' ? <HiMinus /> : <HiPlus />}
+      >
         <Typography>{label}</Typography>
         {Array.isArray(selectedOptionsEntity) ? (
           <ChipFilters selectedFiltersEntity={selectedOptionsEntity} />
