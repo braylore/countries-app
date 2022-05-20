@@ -54,9 +54,12 @@ export const optionsSlice = createSlice({
         ...state.filters,
         ...action.payload
       };
+    },
+    optionsSearchChanged: (state, action: PayloadAction<string>) => {
+      state.searchQuery = action.payload;
     }
   }
 });
 
-export const { optionsSortChanged, optionsFilterChanged } = optionsSlice.actions;
+export const { optionsSortChanged, optionsFilterChanged, optionsSearchChanged } = optionsSlice.actions;
 export default optionsSlice.reducer;
