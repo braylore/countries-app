@@ -13,7 +13,8 @@ export const countriesApi = createApi({
       query: (name) => getCountryByName(name)
     }),
     getCountryByCode: builder.query<ICountry[], string>({
-      query: (codes) => getCountryByCode(codes)
+      query: (codes) => getCountryByCode(codes),
+      keepUnusedDataFor: 0.1
     })
   })
 });

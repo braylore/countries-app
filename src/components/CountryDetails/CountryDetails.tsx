@@ -7,6 +7,7 @@ import { useGetCountryByCodeQuery } from '../../api/countriesApi';
 import Tooltip from '../UI/Tooltip/Tooltip';
 import { CountryInfo } from '../../types/CountryInfo';
 import { useColorMode } from '../../hooks/useColorMode';
+import LoaderDots from '../UI/Loaders/LoaderDots/LoaderDots';
 import styles from './countryDetails.module.scss';
 
 interface ICountryDetailsProps {
@@ -43,7 +44,7 @@ const CountryDetails: FC<ICountryDetailsProps> = ({ countryInfo }) => {
     borders
   } = countryInfo;
 
-  const { data: borderCountries = [] } = useGetCountryByCodeQuery(borders.join(','), {
+  const { data: borderCountries = [], isFetching } = useGetCountryByCodeQuery(borders.join(','), {
     skip: borders.length === 0
   });
 
@@ -164,7 +165,9 @@ const CountryDetails: FC<ICountryDetailsProps> = ({ countryInfo }) => {
         >
           <div className={styles.wrapper}>
             <b>Border Countries:</b>
-            {borders.length ? (
+            {isFetching ? (
+              <LoaderDots />
+            ) : borders.length ? (
               <div className={styles.bordersWrapper}>
                 {borderCountries.map((country) => {
                   return (
