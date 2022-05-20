@@ -1,4 +1,5 @@
 import { MouseEvent } from 'react';
+import { Box } from '@mui/material';
 import Accordion from '../UI/Accordion/Accordion';
 import { optionsSort } from '../../constants/optionsSort';
 import OptionsSort from '../OptionsSort/OptionsSort';
@@ -20,11 +21,19 @@ const OptionsForm = () => {
         <div></div>
       </Accordion>
       <Accordion label="Sorting">
-        <OptionsSort
-          handleClick={handleSortChange}
-          activeSort={sort}
-          {...optionsSort}
-        />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}
+        >
+          <OptionsSort
+            handleClick={handleSortChange}
+            activeSort={sort}
+            {...optionsSort}
+          />
+        </Box>
       </Accordion>
     </div>
   );
