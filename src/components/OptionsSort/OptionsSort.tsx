@@ -5,6 +5,8 @@ import { IoCaretDownOutline, IoCaretUpOutline } from 'react-icons/io5';
 import { SortValueEnum } from '../../constants/sortEnums';
 import { OptionsSortElements } from '../../types/OptionsSortElements';
 import { getFormattedClassName } from '../../utils/getFormattedClassName';
+import { isSelectedBtn } from '../../utils/isSelectedBtn';
+import { getActiveClassAndDirection } from '../../utils/getActiveClassAndDirection';
 import ToggleBtn from '../UI/ToggleBtn/ToggleBtn';
 import styles from './optionsSort.module.scss';
 
@@ -16,12 +18,7 @@ interface IOptionsSortProps {
 }
 
 const OptionsSort: FC<IOptionsSortProps> = ({ text, elements, activeSort, handleClick }) => {
-  const activeClass = activeSort.split('-')[0];
-  let activeDirection = activeSort.split('-')[1];
-
-  if (!activeDirection) {
-    activeDirection = '';
-  }
+  const { activeClass, activeDirection } = getActiveClassAndDirection(activeSort);
 
   return (
     <>
@@ -51,7 +48,7 @@ const OptionsSort: FC<IOptionsSortProps> = ({ text, elements, activeSort, handle
               <ToggleBtn
                 disableRipple
                 key={label}
-                selected={value.includes(activeSort)}
+                selected={isSelectedBtn(value, activeSort)}
                 value={value}
                 onClick={handleClick}
               >
