@@ -1,5 +1,5 @@
 import { ChangeEvent, FC } from 'react';
-import { SelectChangeEvent } from '@mui/material';
+import { Grid, SelectChangeEvent } from '@mui/material';
 import CountriesList from '../components/CountriesList/CountriesList';
 import { useGetAllCountriesQuery } from '../api/countriesApi';
 import OptionsForm from '../components/OptionsForm/OptionsForm';
@@ -37,19 +37,34 @@ const HomePage: FC = () => {
 
   return (
     <>
-      <Select
-        elements={selectOptions.elements}
-        label={selectOptions.label}
-        handleChange={handleSelectChange}
-        numValue={countriestSelect}
-      />
-      <Input
-        value={searchQuery}
-        handleChange={handleSearchChange}
-        label="Search for a country"
-        type="search"
-      />
       <OptionsForm />
+      <Grid
+        sx={{
+          marginTop: 0,
+          marginBottom: '15px'
+        }}
+        container
+        justifyContent="center"
+        spacing={2}
+      >
+        <Grid item>
+          <Input
+            value={searchQuery}
+            handleChange={handleSearchChange}
+            label="Search for a country"
+            type="search"
+          />
+        </Grid>
+        <Grid item>
+          <Select
+            elements={selectOptions.elements}
+            label={selectOptions.label}
+            handleChange={handleSelectChange}
+            numValue={countriestSelect}
+          />
+        </Grid>
+      </Grid>
+
       <CountriesList
         countriesList={countries.slice(
           countriestSelect * currentPage - countriestSelect,
