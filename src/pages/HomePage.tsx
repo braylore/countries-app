@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, FC, useRef } from 'react';
 import { Grid, SelectChangeEvent } from '@mui/material';
 import CountriesList from '../components/CountriesList/CountriesList';
 import { useGetAllCountriesQuery } from '../api/countriesApi';
@@ -17,6 +17,7 @@ import { useDidMountEffect } from '../hooks/useDidMountEffect';
 import SkeletonList from '../components/SkeletonList/SkeletonList';
 
 const HomePage: FC = () => {
+  const divRef = useRef<HTMLDivElement>(null);
   const { data: countries = [], isLoading, isError } = useGetAllCountriesQuery();
   const dispatch = useAppDispatch();
 
@@ -48,6 +49,12 @@ const HomePage: FC = () => {
 
   const handlePaginationChange = (e: ChangeEvent<unknown>, page: number) => {
     dispatch(currentPageChanged(page));
+
+    if (currentPage !== page) {
+      if (divRef.current !== null) {
+        divRef.current.scrollIntoView();
+      }
+    }
   };
 
   const handleSelectChange = (e: SelectChangeEvent<unknown>) => {
@@ -93,6 +100,7 @@ const HomePage: FC = () => {
       {countriesList.length === 0 && !isLoading && !isError && (
         <h2 style={{ textAlign: 'center' }}>No countries found</h2>
       )}
+      <div ref={divRef} />
       <CountriesList countriesList={countriesList} />
       <Pagination
         changePage={handlePaginationChange}
