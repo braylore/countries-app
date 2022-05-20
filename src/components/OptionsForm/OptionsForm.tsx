@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, SyntheticEvent, useState } from 'react';
+import { ChangeEvent, FC, MouseEvent, SyntheticEvent, useState } from 'react';
 import { Box } from '@mui/material';
 import Accordion from '../UI/Accordion/Accordion';
 import { optionsSort } from '../../constants/optionsSort';
@@ -13,7 +13,11 @@ import { PayloadOptionsFilters } from '../../types/PayloadOptionsFilters';
 import { FiltersNameEnum } from '../../constants/filtersEnums';
 import OptionsFilters from '../OptionsFilters/OptionsFilters';
 
-const OptionsForm = () => {
+interface IOptionsFormProps {
+  isDisabled: boolean;
+}
+
+const OptionsForm: FC<IOptionsFormProps> = ({ isDisabled }) => {
   const dispatch = useAppDispatch();
   const { sort, filters } = useAppSelector((state) => state.optionsReducer);
   const [tabValue, setTabValue] = useState(0);
@@ -40,7 +44,10 @@ const OptionsForm = () => {
         marginTop: '20px'
       }}
     >
-      <Accordion label="Filtration">
+      <Accordion
+        isDisabled={isDisabled}
+        label="Filtration"
+      >
         <Tabs
           value={tabValue}
           onTabChange={handleTabChange}
@@ -69,7 +76,10 @@ const OptionsForm = () => {
           marginTop: '5px'
         }}
       >
-        <Accordion label="Sorting">
+        <Accordion
+          isDisabled={isDisabled}
+          label="Sorting"
+        >
           <Box
             sx={{
               display: 'flex',

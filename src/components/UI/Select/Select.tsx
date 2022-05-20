@@ -34,11 +34,13 @@ interface ISelectCountriesProps {
   label: string;
   numValue: number;
   handleChange: (e: SelectChangeEvent<unknown>) => void;
+  isDisabled: boolean;
 }
 
-const CustomSelect: FC<ISelectCountriesProps> = ({ label, elements, numValue, handleChange }) => {
+const CustomSelect: FC<ISelectCountriesProps> = ({ label, elements, numValue, handleChange, isDisabled }) => {
   return (
     <FormControl
+      disabled={isDisabled}
       sx={{ minWidth: '207px' }}
       size="small"
     >

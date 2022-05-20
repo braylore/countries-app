@@ -59,7 +59,7 @@ const HomePage: FC = () => {
 
   return (
     <>
-      <OptionsForm />
+      <OptionsForm isDisabled={isLoading || isError} />
       <Grid
         sx={{
           marginTop: 0,
@@ -71,6 +71,7 @@ const HomePage: FC = () => {
       >
         <Grid item>
           <Input
+            isDisabled={isLoading || isError}
             value={searchQuery}
             handleChange={handleSearchChange}
             label="Search for a country"
@@ -79,6 +80,7 @@ const HomePage: FC = () => {
         </Grid>
         <Grid item>
           <Select
+            isDisabled={isLoading || isError}
             elements={selectOptions.elements}
             label={selectOptions.label}
             handleChange={handleSelectChange}

@@ -29,11 +29,13 @@ interface ICustomInputProps {
   label: string;
   value: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  isDisabled: boolean;
 }
 
-const CustomInput: FC<ICustomInputProps> = ({ type, label, value, handleChange }) => {
+const CustomInput: FC<ICustomInputProps> = ({ type, label, value, handleChange, isDisabled }) => {
   return (
     <CustomizedInput
+      disabled={isDisabled}
       value={value}
       onChange={handleChange}
       type={type}

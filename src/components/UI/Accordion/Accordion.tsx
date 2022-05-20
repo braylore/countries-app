@@ -45,9 +45,10 @@ const AccordionDetails = styled(MuiAccordionDetails)({
 interface ICustomAccordionProps {
   children: ReactNode;
   label: string;
+  isDisabled: boolean;
 }
 
-const CustomAccordion: FC<ICustomAccordionProps> = ({ children, label }) => {
+const CustomAccordion: FC<ICustomAccordionProps> = ({ children, label, isDisabled }) => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
   const handleChange = (panel: string) => (event: SyntheticEvent, newExpanded: boolean) => {
@@ -56,6 +57,7 @@ const CustomAccordion: FC<ICustomAccordionProps> = ({ children, label }) => {
 
   return (
     <Accordion
+      disabled={isDisabled}
       expanded={expanded === 'panel1'}
       onChange={handleChange('panel1')}
     >
