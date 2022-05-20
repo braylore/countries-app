@@ -55,6 +55,7 @@ const Header: FC = () => {
         >
           <IoEarth />
           <Typography
+            component="h1"
             variant="h5"
             sx={{
               fontWeight: 700

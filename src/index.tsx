@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
 import { store } from './store';
-import './index.css';
+import './index.scss';
 import App from './components/App/App';
 import { ColorModeContextProvider } from './context/ColorModeContext';
 
@@ -21,4 +21,3 @@ root.render(
     </Provider>
   </BrowserRouter>
 );
-
