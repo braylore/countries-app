@@ -4,9 +4,10 @@ import { IoReturnDownBack } from 'react-icons/io5';
 
 interface IBtnProps {
   handleClick: () => void;
+  text: string;
 }
 
-const Btn: FC<IBtnProps> = ({ handleClick }) => {
+const Btn: FC<IBtnProps> = ({ handleClick, text }) => {
   return (
     <Button
       sx={{
@@ -23,7 +24,7 @@ const Btn: FC<IBtnProps> = ({ handleClick }) => {
           marginRight: '5px'
         }}
       />
-      Back
+      {text}
     </Button>
   );
 };
