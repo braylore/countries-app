@@ -9,9 +9,10 @@ import { optionsSearchChanged } from '../store/reducers/optionsSlice';
 import Pagination from '../components/UI/Pagination/Pagination';
 import Select from '../components/UI/Select/Select';
 import { selectOptions } from '../constants/selectOptions';
+import { countriestSelectChanged, currentPageChanged } from '../store/reducers/paginationSlice';
 
 const HomePage: FC = () => {
-  const { data = [] } = useGetAllCountriesQuery();
+  const { data: countries = [] } = useGetAllCountriesQuery();
   const dispatch = useAppDispatch();
 
   const {
@@ -20,16 +21,18 @@ const HomePage: FC = () => {
     searchQuery
   } = useAppSelector((state) => state.optionsReducer);
 
+  const { countriestSelect, currentPage } = useAppSelector((state) => state.paginationReducer);
+
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>): void => {
     dispatch(optionsSearchChanged(e.target.value));
   };
 
-  const changePage = (e: ChangeEvent<unknown>, page: number) => {
-    console.log(page);
+  const handlePaginationChange = (e: ChangeEvent<unknown>, page: number) => {
+    dispatch(currentPageChanged(page));
   };
 
   const handleSelectChange = (e: SelectChangeEvent<unknown>) => {
-    console.log(e.target.value);
+    dispatch(countriestSelectChanged(e.target.value as number));
   };
 
   return (
@@ -38,7 +41,7 @@ const HomePage: FC = () => {
         elements={selectOptions.elements}
         label={selectOptions.label}
         handleChange={handleSelectChange}
-        numValue={10}
+        numValue={countriestSelect}
       />
       <Input
         value={searchQuery}
@@ -47,11 +50,16 @@ const HomePage: FC = () => {
         type="search"
       />
       <OptionsForm />
-      <CountriesList countriesList={data} />
+      <CountriesList
+        countriesList={countries.slice(
+          countriestSelect * currentPage - countriestSelect,
+          countriestSelect * currentPage
+        )}
+      />
       <Pagination
-        changePage={changePage}
-        totalPages={10}
-        currentPage={1}
+        changePage={handlePaginationChange}
+        totalPages={Math.ceil(countries.length / countriestSelect)}
+        currentPage={currentPage}
       />
     </>
   );
