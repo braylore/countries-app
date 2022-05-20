@@ -1,15 +1,18 @@
 import { ToggleButtonGroup, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
+import { SortValueEnum } from '../../constants/sortEnums';
 import { OptionsSortElements } from '../../types/OptionsSortElements';
 import ToggleBtn from '../UI/ToggleBtn/ToggleBtn';
 
 interface IOptionsSortProps {
+  activeSort: string;
   text: string;
   elements: OptionsSortElements;
+  handleClick: (e: MouseEvent<HTMLElement>, value: SortValueEnum) => void;
 }
 
-const OptionsSort: FC<IOptionsSortProps> = ({ text, elements }) => {
+const OptionsSort: FC<IOptionsSortProps> = ({ text, elements, activeSort, handleClick }) => {
   return (
     <>
       <Typography
@@ -39,6 +42,7 @@ const OptionsSort: FC<IOptionsSortProps> = ({ text, elements }) => {
                 disableRipple
                 key={label}
                 value={value}
+                onClick={handleClick}
               >
                 {label}
               </ToggleBtn>
