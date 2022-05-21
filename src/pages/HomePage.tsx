@@ -96,7 +96,9 @@ const HomePage: FC = () => {
         </Grid>
       </Grid>
       {isLoading && <SkeletonList />}
-      {isError && <h2 style={{ textAlign: 'center' }}>An error occurred while fetching countries</h2>}
+      {isError && (
+        <h2 style={{ textAlign: 'center' }}>An error occurred while fetching countries. Please try again later.</h2>
+      )}
       {countriesList.length === 0 && !isLoading && !isError && (
         <h2 style={{ textAlign: 'center' }}>No countries found</h2>
       )}
