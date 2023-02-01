@@ -14,7 +14,7 @@ const CountriesList: FC<ICountriesListProps> = ({ countriesList }) => {
       container
       spacing={4}
        sx={{
-        marginLeft: '-53px'
+        marginLeft: '-57px'
       }}
       component="ul"
     >
