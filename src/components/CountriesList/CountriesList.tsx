@@ -13,6 +13,9 @@ const CountriesList: FC<ICountriesListProps> = ({ countriesList }) => {
       justifyContent="center"
       container
       spacing={4}
+       sx={{
+        marginLeft: '-53px'
+      }}
       component="ul"
     >
       {countriesList.map(({ name, flags, capital, population, area }) => {
